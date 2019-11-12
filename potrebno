@@ -1,0 +1,33 @@
+Potrebno za rad:
+
+-MinGW-w64 ili TDM-GCC64 (SEH) kompileri - oba rade
+-wxWidgets 3.1.3 (trenutno najnoviji)
+-Code::Blocks 17.12 (može i neki drugi)
+-Za statičko kompiliranje ugraditi biblioteke libuxtheme.a i liboleacc.a (nalaze se u librarijima compilera)
+-primjer: C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\x86_64-w64-mingw32\lib (dodati u search directories->linker)
+-wxWidgets bi trebali biti kompilirani pomoću odgovarajućih kompilera
+-provjereno rade sve mogućnosti: dijeljeno i nedijeljeno, monolitno, release i debug, ali mora tako biti kreirano i wxWidgets
+-trenutni projekt je statički (nedijeljeni), monolitni, istovremeno i release i debug
+-wxFormBuilder za izradu GUI sučelja (npr. 3.9.0)
+
+================================================
+
+Kompiliranje wxWidgetsa - u Windowsima, nije potrebno koristiti MSYS2:
+
+Za MinGW-w64\x86_64
+
+mingw32-make -j4 -f makefile.gcc SHARED=1 UNICODE=1 BUILD=release MONOLITHIC=1 LDFLAGS=-Wl,--allow-multiple-definition
+
+-----------------------------
+Za TDM GCC
+
+mingw32-make SHELL=CMD.exe -j4 -f makefile.gcc BUILD=release UNICODE=1 SHARED=0 MONOLITHIC=1
+ CXXFLAGS="-fno-keep-inline-dllexport -std=gnu++11"
+ 
+ ------------------------------
+ 
+ "C:\Program Files\mingw-w64\x86_64-8.1.0-posix-sjlj-rt_v6-rev0\mingw64"\bin\mingw32-make -f makefile.gcc -j2 CXXFLAGS="-std=gnu++11" BUILD=release UNICODE=1 SHARED=1 MONOLITHIC=1
+ 
+ ===================================================
+
+
