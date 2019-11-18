@@ -31,17 +31,21 @@ void Model::PoveziSaProzorom(GlavniProzor* prozor)
 void Model::radna(int id, std::shared_future<void> futur)
 {
     wxString sadrzaj;
+    srand(time(nullptr)+id);
+    rand(); rand();
     sadrzaj << "Pokrenuta je dretva "<< id <<"\n";
     this->upisiUKonzolu(sadrzaj);
-
     /* zahtijev za futurom blokira dretvu dok se ne postavi promis. Ovdje je wait koji se sam odblokira nakon 1000 ms */
     /* ako se sam odblokirao, petlja se nastavlja. Ako je odblokiran promisom, petlja staje. */
-    while (futur.wait_for(std::chrono::milliseconds(2000)) == std::future_status::timeout)
+
+    int cekanje = 300+((rand()+10)%800);
+    while (futur.wait_for(std::chrono::milliseconds(cekanje)) == std::future_status::timeout)
     {
         pomakniAnimaciju(1);
         sadrzaj.clear();
-        sadrzaj << "Dretva "<< id <<" radi...\n";
+        sadrzaj << "Dretva "<< id <<wxT(" radi. Čekanje ") << cekanje << "...\n";
         this->upisiUKonzolu(sadrzaj);
+        cekanje = 300+((rand()+10)%800);
     }
     sadrzaj.clear();
     sadrzaj << wxT("Završava dretva ")<< id <<"\n";

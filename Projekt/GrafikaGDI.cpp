@@ -53,6 +53,7 @@ bool GrafikaGDI::PoveziSaProzorom(GlavniProzor* prozor)
 /* crta testni crtez u bitmapu preko memorijskog konteksta */
 void GrafikaGDI::CrtajTest(wxAntialiasMode aa)
 {
+    memDC->SelectObject(*bitmap); //u raw pristupu se deselektira bitmapa pa ju treba selektirati
     wxGraphicsContext* gc = wxGraphicsContext::Create( *memDC );
     if(gc)
     {
@@ -79,10 +80,11 @@ void GrafikaGDI::BitmapTest(unsigned char pomak)
     memDC->SelectObject(wxNullBitmap);
 
     /* za 24 bita NativePixelData, a za 32 bita AlphaPixeldata */
-    wxAlphaPixelData* npd = new wxAlphaPixelData(*bitmap);
-    w = npd->GetWidth();
-    h = npd->GetHeight();
-    s = npd->GetRowStride();
+    /* PixelData tj. raw pristup će zaključati pitmapu sve dok ne izađe iz dosega */
+    wxAlphaPixelData npd(*bitmap);
+    w = npd.GetWidth();
+    h = npd.GetHeight();
+    s = npd.GetRowStride();
     if(pomak==0)
         upis << wxT("Bitmapa - širina: ") << w << ", visina: " << h << wxT(", širina retka: ") << s << "\n";
     //else
@@ -90,9 +92,9 @@ void GrafikaGDI::BitmapTest(unsigned char pomak)
     upisiUKonzolu(upis);
 
 
-    wxAlphaPixelData::Iterator it(*npd);
+    wxAlphaPixelData::Iterator it(npd);
 
-    it.Offset(*npd, 100, 100);
+    it.Offset(npd, 100, 100);
 
     for ( int y = 0; y < 255; ++y )
     {
@@ -106,12 +108,9 @@ void GrafikaGDI::BitmapTest(unsigned char pomak)
         }
 
         it = pocetakReda;
-        it.OffsetY(*npd, 1);
+        it.OffsetY(npd, 1);
     }
     p+=pomak;
-
-    delete npd;
-    memDC->SelectObject(*bitmap);
 }
 
 /* Kopira sadrzaj iz bitmape i njezinog konteksta u kontekst panela.
@@ -121,9 +120,10 @@ bool GrafikaGDI::Blit(wxPaintEvent& event)
     int w, h;
     wxPanel *panel;
     panel = wxDynamicCast(event.GetEventObject(),wxPanel);
-
     if(memDC != nullptr && panel != nullptr)
     {
+        /* ponovno selektiramo bitmapu u kontekst */
+        memDC->SelectObject(*bitmap);
         panel->GetSize(&w, &h);
         wxAutoBufferedPaintDC hdc(panel);
         hdc.Blit(0,0,w,h,memDC,0,0);

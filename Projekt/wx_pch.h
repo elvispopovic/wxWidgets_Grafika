@@ -34,6 +34,7 @@
     #include <wx/dcbuffer.h>
     #include <wx/rawbmp.h>
     #include <iostream>
+    #include <ctime>
     #include <thread>
     #include <future>
 #endif // WX_PRECOMP
