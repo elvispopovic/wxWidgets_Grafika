@@ -1,0 +1,67 @@
+#defines: 
+
+WX_PRECOMP
+
+compiler options
+-Winvalid-pch
+-include wx_pch.h
+
+
+u app.h
+
+#ifndef WX_PRECOMP
+#include <wx/app.h>
+#endif
+
+u app.cpp
+
+#ifdef WX_PRECOMP
+#include "wx_pch.h"
+#endif
+
+#ifdef __BORLANDC__
+#pragma hdrstop
+#endif //__BORLANDC__
+
+u main.cpp
+
+#ifdef WX_PRECOMP
+#include "wx_pch.h"
+#endif
+
+#ifdef __BORLANDC__
+#pragma hdrstop
+#endif //__BORLANDC__
+
+
+u GUIFrame.h 
+
+#ifdef WX_GCH
+#include <wx_pch.h>
+#else
+#include <wx/wx.h>
+#endif
+
+#include <wx/menu.h>
+
+
+u GUIFrame.cpp
+
+#include "wx/wxprec.h"
+
+#ifdef __BORLANDC__
+#pragma hdrstop
+#endif //__BORLANDC__
+
+#ifndef WX_PRECOMP
+#include <wx/wx.h>
+#endif //WX_PRECOMP
+
+#include "GUIFrame.h"
+
+
+/***********/
+Code::Blocks to sam slaže ako se uključi pch
+Inače, treba kreirati wx_pch.h, uključiti ga u projekt i onda desni klik na njega i properties -> odabrati kompiliranje
+
+Ukljuciti opciju da PCH budu u izlaznim objektnim folderima

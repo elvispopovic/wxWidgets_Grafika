@@ -24,7 +24,6 @@ GrafikaGDI::GrafikaGDI()
 
 GrafikaGDI::~GrafikaGDI()
 {
-
     memDC->SelectObject(wxNullBitmap);
     delete bitmap;
     delete memDC;
@@ -34,7 +33,6 @@ GrafikaGDI::~GrafikaGDI()
 bool GrafikaGDI::PoveziSaProzorom(GlavniProzor* prozor)
 {
     int v1,v2,v3;
-    this->prozor = prozor;
     prozorEvtHandler = (wxEvtHandler*)prozor;
     wxString upis;
 
@@ -73,24 +71,28 @@ void GrafikaGDI::CrtajTest(wxAntialiasMode aa)
     }
 }
 
-void GrafikaGDI::BitmapTest()
+void GrafikaGDI::BitmapTest(unsigned char pomak)
 {
+    static unsigned char p = 0;
     int w, h, s;
     wxString upis;
     memDC->SelectObject(wxNullBitmap);
 
     /* za 24 bita NativePixelData, a za 32 bita AlphaPixeldata */
-    wxAlphaPixelData npd(*bitmap);
-    w = npd.GetWidth();
-    h = npd.GetHeight();
-    s = npd.GetRowStride();
-    upis << wxT("Bitmapa - širina: ") << w << ", visina: " << h << wxT(", širina retka: ") << s << "\n";
+    wxAlphaPixelData* npd = new wxAlphaPixelData(*bitmap);
+    w = npd->GetWidth();
+    h = npd->GetHeight();
+    s = npd->GetRowStride();
+    if(pomak==0)
+        upis << wxT("Bitmapa - širina: ") << w << ", visina: " << h << wxT(", širina retka: ") << s << "\n";
+    //else
+    //    upis << wxT("Bitmapa, crtanja - pomak: ") << (int)p << "\n";
     upisiUKonzolu(upis);
 
 
-    wxAlphaPixelData::Iterator it(npd);
+    wxAlphaPixelData::Iterator it(*npd);
 
-    it.Offset(npd, 100, 100);
+    it.Offset(*npd, 100, 100);
 
     for ( int y = 0; y < 255; ++y )
     {
@@ -98,16 +100,17 @@ void GrafikaGDI::BitmapTest()
 
         for ( int x = 0; x < 255; ++x, ++it )
         {
-            it.Red() = x;
-            it.Green() = 255-x;
-            it.Blue() = y;
+            it.Red() = x+p;
+            it.Green() = 255-x-p;
+            it.Blue() = y+p;
         }
 
         it = pocetakReda;
-        it.OffsetY(npd, 1);
+        it.OffsetY(*npd, 1);
     }
+    p+=pomak;
 
-
+    delete npd;
     memDC->SelectObject(*bitmap);
 }
 
@@ -139,7 +142,7 @@ void GrafikaGDI::upisiUKonzolu(wxString sadrzaj)
     pp->t=PorukaPodaci::tip::Konzola;
 
     pp->sadrzaj = sadrzaj;
-    konzolaEvent = new wxCommandEvent(EVT_POSALJI_PORUKU);
+    konzolaEvent = new wxCommandEvent(EVT_PORUKA_PROZORU);
     konzolaEvent->SetClientData((void *)pp);
     wxQueueEvent(prozorEvtHandler,konzolaEvent);
 }
@@ -153,7 +156,7 @@ void GrafikaGDI::upisiStatus(wxString sadrzaj)
     pp->t=PorukaPodaci::tip::Status;
 
     pp->sadrzaj = sadrzaj;
-    statusEvent = new wxCommandEvent(EVT_POSALJI_PORUKU);
+    statusEvent = new wxCommandEvent(EVT_PORUKA_PROZORU);
     statusEvent->SetClientData((void *)pp);
     wxQueueEvent(prozorEvtHandler,statusEvent);
 }

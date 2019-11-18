@@ -33,6 +33,9 @@
     #include <wx/dcgraph.h>
     #include <wx/dcbuffer.h>
     #include <wx/rawbmp.h>
+    #include <iostream>
+    #include <thread>
+    #include <future>
 #endif // WX_PRECOMP
 #endif // WX_GCH
 

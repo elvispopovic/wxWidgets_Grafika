@@ -56,6 +56,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++14" />
 			<Add option="-m64" />
 			<Add option="-pipe" />
 			<Add option="-mthreads" />
@@ -96,12 +97,14 @@
 		<Unit filename="GUIGlavniProzor.h" />
 		<Unit filename="GrafikaGDI.cpp" />
 		<Unit filename="GrafikaGdi.h" />
+		<Unit filename="Model.cpp" />
+		<Unit filename="Model.h" />
 		<Unit filename="ProjektApp.cpp" />
 		<Unit filename="ProjektApp.h" />
 		<Unit filename="ProjektProzor.cpp" />
 		<Unit filename="ProjektProzor.h" />
 		<Unit filename="WxWizFrame.fbp" />
-		<Unit filename="include/interfaces.h" />
+		<Unit filename="interfaces.h" />
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

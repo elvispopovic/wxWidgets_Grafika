@@ -3,6 +3,8 @@
 
 #include "interfaces.h"
 
+/* Klasa GrafikeGDI */
+/* GlavniProzor nema sucelje */
 class GrafikaGDI : public IGrafikaGDI
 {
     public:
@@ -10,7 +12,7 @@ class GrafikaGDI : public IGrafikaGDI
         ~GrafikaGDI();
         bool PoveziSaProzorom(GlavniProzor* prozor);
         void CrtajTest(wxAntialiasMode aa=wxANTIALIAS_DEFAULT);
-        void BitmapTest();
+        void BitmapTest(unsigned char pomak);
         bool Blit(wxPaintEvent& event);
 
     protected:
@@ -21,7 +23,6 @@ class GrafikaGDI : public IGrafikaGDI
         void upisiStatus(wxString sadrzaj);
 
     private:
-        GlavniProzor* prozor;
         wxEvtHandler *prozorEvtHandler;
 
 };

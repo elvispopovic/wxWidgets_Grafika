@@ -10,7 +10,8 @@
 #ifndef PROJEKT2APP_H
 #define PROJEKT2APP_H
 
-#include "GrafikaGdi.h"
+#include "interfaces.h"
+#include "Model.h"
 #include "ProjektProzor.h"
 
 class ProjektApp : public wxApp
@@ -20,7 +21,9 @@ class ProjektApp : public wxApp
         virtual int OnExit();
 
     private:
-        GrafikaGDI* grafika;
+        GlavniProzor1* prozor;
+        IGrafikaGDI* grafika;
+        Model* model;
 };
 
 #endif // PROJEKT2APP_H

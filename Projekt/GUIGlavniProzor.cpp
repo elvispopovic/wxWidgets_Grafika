@@ -31,6 +31,17 @@ GlavniProzor::GlavniProzor( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	mbar->Append( fileMenu, wxT("&File") );
 
+	m_menu3 = new wxMenu();
+	wxMenuItem* m_menuItem3;
+	m_menuItem3 = new wxMenuItem( m_menu3, wxID_ANY, wxString( wxT("&Pokreni") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu3->Append( m_menuItem3 );
+
+	wxMenuItem* m_menuItem4;
+	m_menuItem4 = new wxMenuItem( m_menu3, wxID_ANY, wxString( wxT("&Zaustavi") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu3->Append( m_menuItem4 );
+
+	mbar->Append( m_menu3, wxT("&Upravljanje") );
+
 	helpMenu = new wxMenu();
 	wxMenuItem* menuHelpAbout;
 	menuHelpAbout = new wxMenuItem( helpMenu, idMenuAbout, wxString( wxT("&About") ) + wxT('\t') + wxT("F1"), wxT("Prikaži info"), wxITEM_NORMAL );
@@ -61,6 +72,12 @@ GlavniProzor::GlavniProzor( wxWindow* parent, wxWindowID id, const wxString& tit
 	panelKontrole = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	bSizerKontrole->Add( panelKontrole, 1, 0, 5 );
 
+	but_pokreni = new wxButton( this, wxID_ANY, wxT("Pokreni"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerKontrole->Add( but_pokreni, 0, wxALL|wxEXPAND, 5 );
+
+	but_zaustavi = new wxButton( this, wxID_ANY, wxT("Zaustavi"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerKontrole->Add( but_zaustavi, 0, wxALL|wxEXPAND, 5 );
+
 
 	bSizerGrafika_Kontrole->Add( bSizerKontrole, 0, 0, 5 );
 
@@ -86,8 +103,12 @@ GlavniProzor::GlavniProzor( wxWindow* parent, wxWindowID id, const wxString& tit
 	// Connect Events
 	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( GlavniProzor::OnClose ) );
 	fileMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GlavniProzor::OnQuit ), this, menuFileQuit->GetId());
+	m_menu3->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GlavniProzor::PokreniDretve ), this, m_menuItem3->GetId());
+	m_menu3->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GlavniProzor::ZaustaviDretve ), this, m_menuItem4->GetId());
 	helpMenu->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GlavniProzor::OnAbout ), this, menuHelpAbout->GetId());
 	panelCrtanje->Connect( wxEVT_PAINT, wxPaintEventHandler( GlavniProzor::PanelCrtanje ), NULL, this );
+	but_pokreni->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GlavniProzor::PokreniDretve ), NULL, this );
+	but_zaustavi->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GlavniProzor::ZaustaviDretve ), NULL, this );
 }
 
 GlavniProzor::~GlavniProzor()
@@ -95,5 +116,7 @@ GlavniProzor::~GlavniProzor()
 	// Disconnect Events
 	this->Disconnect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( GlavniProzor::OnClose ) );
 	panelCrtanje->Disconnect( wxEVT_PAINT, wxPaintEventHandler( GlavniProzor::PanelCrtanje ), NULL, this );
+	but_pokreni->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GlavniProzor::PokreniDretve ), NULL, this );
+	but_zaustavi->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GlavniProzor::ZaustaviDretve ), NULL, this );
 
 }

@@ -2835,12 +2835,12 @@
 1514140570 source:d:\programiranje\wxwidgets_grafika\projekt\resource.rc
 	"wx/msw/wx.rc"
 
-1573422459 source:d:\programiranje\wxwidgets_grafika\projekt\guiglavniprozor.cpp
+1574005608 source:d:\programiranje\wxwidgets_grafika\projekt\guiglavniprozor.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIGlavniProzor.h"
 
-1573422078 d:\programiranje\wxwidgets_grafika\projekt\guiglavniprozor.h
+1574005608 d:\programiranje\wxwidgets_grafika\projekt\guiglavniprozor.h
 	<wx/artprov.h>
 	<wx/xrc/xmlres.h>
 	<wx/string.h>
@@ -2853,6 +2853,7 @@
 	<wx/colour.h>
 	<wx/settings.h>
 	<wx/panel.h>
+	<wx/button.h>
 	<wx/sizer.h>
 	<wx/textctrl.h>
 	<wx/statusbr.h>
@@ -2867,19 +2868,22 @@
 	"ProjektProzor.h"
 	"GUIGlavniProzor.h"
 
-1573547404 d:\programiranje\wxwidgets_grafika\projekt\projektapp.h
-	"GrafikaGdi.h"
+1574067692 d:\programiranje\wxwidgets_grafika\projekt\projektapp.h
+	"interfaces.h"
+	"Model.h"
 	"ProjektProzor.h"
 
-1573560325 source:d:\programiranje\wxwidgets_grafika\projekt\projektapp.cpp
+1574072388 source:d:\programiranje\wxwidgets_grafika\projekt\projektapp.cpp
 	"wx_pch.h"
 	"ProjektApp.h"
+	"GrafikaGdi.h"
+	"model.h"
 
-1573565212 source:d:\programiranje\wxwidgets_grafika\projekt\grafikagdi.cpp
+1574072471 source:d:\programiranje\wxwidgets_grafika\projekt\grafikagdi.cpp
 	"wx_pch.h"
 	"GrafikaGdi.h"
 
-1573547404 d:\programiranje\wxwidgets_grafika\projekt\grafikagdi.h
+1574066399 d:\programiranje\wxwidgets_grafika\projekt\grafikagdi.h
 	"interfaces.h"
 
 1572198102 c:\wxwidgets_3_1_3_mingw\include\wx\dcgraph.h
@@ -2892,12 +2896,12 @@
 	"wx/dcclient.h"
 	"wx/window.h"
 
-1573547404 d:\programiranje\wxwidgets_grafika\projekt\projektprozor.h
+1574066589 d:\programiranje\wxwidgets_grafika\projekt\projektprozor.h
 	"interfaces.h"
 
-1573560325 source:d:\programiranje\wxwidgets_grafika\projekt\projektprozor.cpp
+1574070804 source:d:\programiranje\wxwidgets_grafika\projekt\projektprozor.cpp
 	"wx_pch.h"
-	"ProjektProzor.h"
+	"Model.h"
 
 1572198102 c:\wxwidgets_3_1_3_mingw\include\wx\rawbmp.h
 	"wx/defs.h"
@@ -2919,7 +2923,7 @@
 	<wx/wxprec.h>
 	<wx/wx.h>
 
-1573563374 d:\programiranje\wxwidgets_grafika\projekt\wx_pch.h
+1573769877 d:\programiranje\wxwidgets_grafika\projekt\wx_pch.h
 	<wx/wxprec.h>
 	<wx_pch.h>
 	<wx/wx.h>
@@ -2930,8 +2934,11 @@
 	<wx/dcgraph.h>
 	<wx/dcbuffer.h>
 	<wx/rawbmp.h>
+	<iostream>
+	<thread>
+	<future>
 
-1573563374 source:d:\programiranje\wxwidgets_grafika\projekt\wx_pch.h
+1573769877 source:d:\programiranje\wxwidgets_grafika\projekt\wx_pch.h
 	<wx/wxprec.h>
 	<wx_pch.h>
 	<wx/wx.h>
@@ -2942,4 +2949,35 @@
 	<wx/dcgraph.h>
 	<wx/dcbuffer.h>
 	<wx/rawbmp.h>
+	<iostream>
+	<thread>
+	<future>
+
+1574071866 d:\programiranje\wxwidgets_grafika\projekt\interfaces.h
+	<wx/app.h>
+	<wx/wx.h>
+	<wx/graphics.h>
+	<wx/dcclient.h>
+	<wx/dcgraph.h>
+	<wx/dcbuffer.h>
+	<wx/rawbmp.h>
+	<iostream>
+	<thread>
+	<future>
+	"GUIGlavniProzor.h"
+
+1573772447 source:d:\programiranje\wxwidgets_grafika\projekt\dretva.cpp
+	"dretva.h"
+
+1573771541 d:\programiranje\wxwidgets_grafika\projekt\dretva.h
+	"interfaces.h"
+
+1573920544 d:\programiranje\wxwidgets_grafika\projekt\include\model.h
+
+1574068476 d:\programiranje\wxwidgets_grafika\projekt\model.h
+	"interfaces.h"
+	"ProjektProzor.h"
+
+1574072202 source:d:\programiranje\wxwidgets_grafika\projekt\model.cpp
+	"Model.h"
 

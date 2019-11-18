@@ -16,24 +16,33 @@
 #endif //__BORLANDC__
 
 #include "ProjektApp.h"
+#include "GrafikaGdi.h"
+#include "model.h"
 
 IMPLEMENT_APP(ProjektApp);
 
 bool ProjektApp::OnInit()
 {
     grafika = new GrafikaGDI();
-    GlavniProzor1* prozor = new GlavniProzor1(0L, grafika);
+    model = new Model(4);
+    prozor = new GlavniProzor1(0L, grafika, model);
     prozor->SetIcon(wxICON(aaaa)); // To Set App Icon
     prozor->Show();
+
     grafika->PoveziSaProzorom(prozor);
-
-    grafika->BitmapTest();
-
+    grafika->BitmapTest(0);
+    model-> PoveziSaProzorom(prozor);
+    //model -> Pokreni();
     return true;
 }
 
+
 int ProjektApp::OnExit()
 {
-    delete grafika;
+    if(model != nullptr)
+        delete model;
+    if(grafika != nullptr)
+        delete grafika;
+    /* prozor se ne briše. Njega uništava destroy prilikom poziva delete ili quit i ne smije se ovdje staviti delete */
     return 0;
 }

@@ -19,6 +19,7 @@
 #include <wx/colour.h>
 #include <wx/settings.h>
 #include <wx/panel.h>
+#include <wx/button.h>
 #include <wx/sizer.h>
 #include <wx/textctrl.h>
 #include <wx/statusbr.h>
@@ -39,15 +40,20 @@ class GlavniProzor : public wxFrame
 	protected:
 		wxMenuBar* mbar;
 		wxMenu* fileMenu;
+		wxMenu* m_menu3;
 		wxMenu* helpMenu;
 		wxPanel* panelCrtanje;
 		wxPanel* panelKontrole;
+		wxButton* but_pokreni;
+		wxButton* but_zaustavi;
 		wxTextCtrl* konzola;
 		wxStatusBar* statusBar;
 
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
+		virtual void PokreniDretve( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ZaustaviDretve( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void PanelCrtanje( wxPaintEvent& event ) { event.Skip(); }
 
