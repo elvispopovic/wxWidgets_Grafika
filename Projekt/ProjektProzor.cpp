@@ -101,7 +101,7 @@ void GlavniProzor1::PanelCrtanje( wxPaintEvent& event )
 
 void GlavniProzor1::OnQuit(wxCommandEvent &event)
 {
-    Close();
+    Close(true);
 }
 
 void GlavniProzor1::OnAbout(wxCommandEvent &event)

@@ -3086,3 +3086,104 @@
 1514140570 source:d:\programiranje\wxwidgets_grafika3\projekt\resource.rc
 	"wx/msw/wx.rc"
 
+1574099836 source:d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\wx_pch.h
+	<wx/wxprec.h>
+	<wx_pch.h>
+	<wx/wx.h>
+	<wx/app.h>
+	<wx/wx.h>
+	<wx/graphics.h>
+	<wx/dcclient.h>
+	<wx/dcgraph.h>
+	<wx/dcbuffer.h>
+	<wx/rawbmp.h>
+	<iostream>
+	<ctime>
+	<thread>
+	<future>
+
+1574100882 source:d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\grafikagdi.cpp
+	"wx_pch.h"
+	"GrafikaGdi.h"
+
+1574099836 d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\wx_pch.h
+	<wx/wxprec.h>
+	<wx_pch.h>
+	<wx/wx.h>
+	<wx/app.h>
+	<wx/wx.h>
+	<wx/graphics.h>
+	<wx/dcclient.h>
+	<wx/dcgraph.h>
+	<wx/dcbuffer.h>
+	<wx/rawbmp.h>
+	<iostream>
+	<ctime>
+	<thread>
+	<future>
+
+1574100882 d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\grafikagdi.h
+	"interfaces.h"
+
+1574100882 d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\interfaces.h
+	<wx/app.h>
+	<wx/wx.h>
+	<wx/graphics.h>
+	<wx/dcclient.h>
+	<wx/dcgraph.h>
+	<wx/dcbuffer.h>
+	<wx/rawbmp.h>
+	<iostream>
+	<ctime>
+	<thread>
+	<future>
+	"GUIGlavniProzor.h"
+
+1574005608 d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\guiglavniprozor.h
+	<wx/artprov.h>
+	<wx/xrc/xmlres.h>
+	<wx/string.h>
+	<wx/bitmap.h>
+	<wx/image.h>
+	<wx/icon.h>
+	<wx/menu.h>
+	<wx/gdicmn.h>
+	<wx/font.h>
+	<wx/colour.h>
+	<wx/settings.h>
+	<wx/panel.h>
+	<wx/button.h>
+	<wx/sizer.h>
+	<wx/textctrl.h>
+	<wx/statusbr.h>
+	<wx/frame.h>
+
+1574005608 source:d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\guiglavniprozor.cpp
+	"wx/wxprec.h"
+	<wx/wx.h>
+	"GUIGlavniProzor.h"
+
+1574100546 source:d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\model.cpp
+	"Model.h"
+
+1574068476 d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\model.h
+	"interfaces.h"
+	"ProjektProzor.h"
+
+1574066589 d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\projektprozor.h
+	"interfaces.h"
+
+1574072388 source:d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\projektapp.cpp
+	"wx_pch.h"
+	"ProjektApp.h"
+	"GrafikaGdi.h"
+	"model.h"
+
+1574067692 d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\projektapp.h
+	"interfaces.h"
+	"Model.h"
+	"ProjektProzor.h"
+
+1514140570 source:d:\programiranje\git\wxwidgets\wxwidgets_grafika\projekt\resource.rc
+	"wx/msw/wx.rc"
+
