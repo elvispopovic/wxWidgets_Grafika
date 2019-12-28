@@ -94,6 +94,8 @@ GL_Kontekst::~GL_Kontekst()
         delete specular_mapa;
     }
     delete glavnoSvjetlo;
+    delete dodatnoSvjetlo1;
+    delete dodatnoSvjetlo2;
     delete[] vrhovi;
     delete[] uvovi;
     delete[] normale;
@@ -151,8 +153,12 @@ bool GL_Kontekst::Inicijaliziraj()
     specular_mapa->PoveziSaLokacijom(shader->DohvatiProgram(), "spekularni_sampler");
 
     glavnoSvjetlo = new Svjetlo(glm::vec3(4.0,4.0,3.0), 4.0, glm::vec3(1.0,1.0,1.0));
-    glavnoSvjetlo->PoveziSaLokacijama(shader->DohvatiProgram(),"SvjetloPolozaj_svjetske","SvjetloBojaIntenzitet");
-
+    dodatnoSvjetlo1 = new Svjetlo(glm::vec3(0.0,0.0,3.0), 1.0, glm::vec3(1.0,1.0,0.0));
+    dodatnoSvjetlo2 = new Svjetlo(glm::vec3(2.0,0.0,-2.0), 1.0, glm::vec3(0.0,1.0,1.0));
+    //glavnoSvjetlo->PoveziSaLokacijama(shader->DohvatiProgram(),"SvjetloPolozaj_svjetske","SvjetloBojaIntenzitet");
+    glavnoSvjetlo->PoveziSaLokacijomSvjetla(shader->DohvatiProgram(),"svjetlo",0);
+    dodatnoSvjetlo1->PoveziSaLokacijomSvjetla(shader->DohvatiProgram(),"svjetlo",1);
+    dodatnoSvjetlo2->PoveziSaLokacijomSvjetla(shader->DohvatiProgram(),"svjetlo",2);
     //izracunavamo vrhove, uvove, normale, tangente i bitangente iz sirovih ulaznih podataka
     izracunajVrhove();
 
@@ -232,6 +238,8 @@ void GL_Kontekst::Render(wxSize velicina, GLfloat kut)
     normal_mapa->Aktiviraj(1);
     specular_mapa->Aktiviraj(2);
     glavnoSvjetlo->Aktiviraj();
+    dodatnoSvjetlo1->Aktiviraj();
+    dodatnoSvjetlo2->Aktiviraj();
 
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

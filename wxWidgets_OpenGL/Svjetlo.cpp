@@ -12,17 +12,21 @@ Svjetlo::~Svjetlo()
     //dtor
 }
 
-bool Svjetlo::PoveziSaLokacijama(GLuint shaderProgram, wxString imePozicije, wxString imeBoje)
+void Svjetlo::PoveziSaLokacijomSvjetla(GLuint shaderProgram, const char* imePozicije, int indeks)
 {
-    polozajID = glGetUniformLocation(shaderProgram, imePozicije);
-    bojaID = glGetUniformLocation(shaderProgram, imeBoje);
-    return true;
+    wxString pozicija;
+    pozicija << imePozicije << "[" << indeks << "]";
+    polozajID = glGetUniformLocation(shaderProgram, pozicija+".polozaj");
+    bojaID = glGetUniformLocation(shaderProgram, pozicija+".boja");
+    intenzitetID = glGetUniformLocation(shaderProgram, pozicija+".intenzitet");
 }
 
 void Svjetlo::Aktiviraj()
 {
     glUniform3f(polozajID, polozaj.x, polozaj.y, polozaj.z);
-    glUniform4f(bojaID, boja.x, boja.y, boja.z, intenzitet);
+    glUniform3f(bojaID, boja.x, boja.y, boja.z);
+    glUniform1f(intenzitetID, intenzitet);
+
 }
 
 void Svjetlo::PostaviPolozaj(GLfloat x, GLfloat y, GLfloat z)

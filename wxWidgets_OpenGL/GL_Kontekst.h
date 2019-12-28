@@ -30,7 +30,7 @@ class GL_Kontekst : public wxGLContext
 
         Tekstura *tekstura, *normal_mapa, *specular_mapa;
 
-        Svjetlo *glavnoSvjetlo;
+        Svjetlo *glavnoSvjetlo, *dodatnoSvjetlo1, *dodatnoSvjetlo2;
 
         GLfloat *vrhovi, *uvovi, *normale, *tangente, *bitangente;
         unsigned short *indeksi;

@@ -3036,11 +3036,12 @@
 	"Tekstura.h"
 	"GL_Panel.h"
 
-1577380735 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\wx_pch.h
+1577534620 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\wx_pch.h
 	<wx/wxprec.h>
 	<wx/wx.h>
 	<cstring>
 	<glm/glm.hpp>
+	<glm/gtc/type_ptr.hpp>
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtx/euler_angles.hpp>
 	<GL/glew.h>
@@ -3059,11 +3060,12 @@
 	"Prozor.h"
 	"GL_Panel.h"
 
-1577380735 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\wx_pch.h
+1577534620 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\wx_pch.h
 	<wx/wxprec.h>
 	<wx/wx.h>
 	<cstring>
 	<glm/glm.hpp>
+	<glm/gtc/type_ptr.hpp>
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtx/euler_angles.hpp>
 	<GL/glew.h>
@@ -3087,7 +3089,7 @@
 1577492139 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_panel.h
 	"GL_Kontekst.h"
 
-1577015081 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_kontekst.h
+1577544721 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_kontekst.h
 	"Shader.h"
 	"Tekstura.h"
 	"Svjetlo.h"
@@ -3096,7 +3098,7 @@
 
 1576336619 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\tekstura.h
 
-1576021328 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\svjetlo.h
+1577545252 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\svjetlo.h
 
 1577524654 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\guiglavniprozor.h
 	<wx/artprov.h>
@@ -3122,7 +3124,7 @@
 1577524244 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_panel.cpp
 	"GL_Panel.h"
 
-1577489898 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\guiglavniprozor.cpp
+1577524654 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\guiglavniprozor.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIGlavniProzor.h"
@@ -3138,14 +3140,14 @@
 	"Shader.h"
 	"GL_Panel.h"
 
-1576021371 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\svjetlo.cpp
+1577541624 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\svjetlo.cpp
 	"Svjetlo.h"
 
 1576336757 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\tekstura.cpp
 	"Tekstura.h"
 	"GL_Panel.h"
 
-1577017804 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_kontekst.cpp
+1577545203 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_kontekst.cpp
 	"GL_Kontekst.h"
 	"GL_Panel.h"
 
@@ -3243,4 +3245,6 @@
 1572198102 c:\wxwidgets_3_1_3_mingw\include\wx\generic\spinctlg.h
 	"wx/compositewin.h"
 	"wx/textctrl.h"
+
+1572198102 c:\wxwidgets_3_1_3_mingw\lib\gcc_lib\mswud\wx\setup.h
 

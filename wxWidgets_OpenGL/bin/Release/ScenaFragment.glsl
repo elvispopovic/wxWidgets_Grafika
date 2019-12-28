@@ -1,10 +1,19 @@
 #version 330 core
 
+#define MAX_SVJETALA 4
+
+struct Svjetlo
+{
+    vec3 polozaj;
+    vec3 boja;
+    float intenzitet;
+};
+
 // Ulazni podaci iz vertex shadera, interpolirani za svaki pixel unutar povrsine
 in vec2 UV;
 in vec3 Polozaj_svjetske;
 
-in vec3 SmjerSvjetla_tangentni;
+in vec3 SmjerSvjetla_tangentni[MAX_SVJETALA];
 in vec3 SmjerPogleda_tangentni;
 
 // Izlazni podatak je boja pixela
@@ -17,13 +26,14 @@ uniform sampler2D spekularni_sampler;
 uniform mat4 V;
 uniform mat4 M;
 uniform mat3 MV3x3;
-uniform vec3 SvjetloPolozaj_svjetske;
-uniform vec4 SvjetloBojaIntenzitet;
+uniform Svjetlo svjetlo[MAX_SVJETALA];
 
 void main(){
+    int i;
+    float cosTheta[MAX_SVJETALA];
+    float udaljenost[MAX_SVJETALA];
+    vec3 l;
     // Razna svojstva izvora svjetlosti
-	vec3 SvjetloBoja = SvjetloBojaIntenzitet.xyz;
-	float SvjetloIntenzitet = SvjetloBojaIntenzitet.w;
 
 	// Svojstva materijala
 	vec3 MaterijalBojaDifuzna = texture2D( difuzni_sampler, UV ).rgb;
@@ -33,17 +43,21 @@ void main(){
 	// Lokalna normala u tangentnom prostoru.
 	vec3 TeksturnaNormala_tangentni = normalize(texture2D( normal_sampler, vec2(UV.x, UV.y) ).rgb*2.0 - 1.0);
 
-	// Udaljenost do izvora svjetla
-	float distance = length( SvjetloPolozaj_svjetske - Polozaj_svjetske );
-
-	// Normala fragmenta u koordinatnom sustavu kamere
+		// Normala fragmenta u koordinatnom sustavu kamere
 	vec3 n = TeksturnaNormala_tangentni;
 
-	// Vektor od fragmenta do svjetla
-	vec3 l = normalize(SmjerSvjetla_tangentni);
+	for(i=0; i< MAX_SVJETALA; i++)
+    {
+        // Udaljenost do izvora svjetla
+        udaljenost[i] = length( svjetlo[i].polozaj - Polozaj_svjetske );
+        //Vektor od fragmenta do svjetla
+        l = normalize(SmjerSvjetla_tangentni[i]);
+        // Kosinus kuta izmedu normale i smjera svjetlosti - o njemu ovisi svjetlina
+        cosTheta[i] = clamp( dot( n,l ), 0,1 );
+    }
 
-	// Kosinus kuta izmedu normale i smjera svjetlosti - o njemu ovisi svjetlina
-	float cosTheta = clamp( dot( n,l ), 0,1 );
+
+
 
 	// Vektor oka - u smjeru kamere
 	vec3 E = normalize(SmjerPogleda_tangentni);
@@ -53,12 +67,15 @@ void main(){
 	// Kosinus kuta izmedju vektora oka i refleksije
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 
-	difuznaBoja =
+	difuznaBoja = MaterijalBojaAmbijentalna;
+	for(i=0; i<4; i++)
+    {
 		// Ambijentalna boja
-		MaterijalBojaAmbijentalna +
+		difuznaBoja +=
 		// Difuzija - boja predmeta
-		MaterijalBojaDifuzna * SvjetloBoja * SvjetloIntenzitet * cosTheta / (distance) +
+		(MaterijalBojaDifuzna * svjetlo[i].boja * svjetlo[i].intenzitet * cosTheta[i] / (udaljenost[i]) +
 		// Specular - sjajnost predmeta
-		MaterijalBojaSpekularna * SvjetloBoja * SvjetloIntenzitet * pow(cosAlpha,5) / (distance);
+		MaterijalBojaSpekularna * svjetlo[i].boja * svjetlo[i].intenzitet * pow(cosAlpha,5) / (udaljenost[i]));
+    }
 
 }
