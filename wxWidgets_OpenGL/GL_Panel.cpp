@@ -77,7 +77,6 @@ void GL_Panel::Animiraj()
 {
     PosaljiKut();
     Refresh(false);
-    kut+=glm::radians(1.0f);
 }
 
 void GL_Panel::PromijeniVelicinu(wxSizeEvent& event)
@@ -113,14 +112,13 @@ void GL_Panel::obradiPoruku(wxCommandEvent& event)
     }
     else if(pp->t == PorukaPaneluPodaci::tip::Pomicanje)
     {
+        kut+=glm::radians(1.0f);
         Animiraj();
-        PosaljiKut();
     }
     else if(pp->t == PorukaPaneluPodaci::tip::PromijeniKut)
     {
-        kut=glm::radians(pp->kut);
+        kut+=glm::radians(1.0f);
         Animiraj();
-        kut-=glm::radians(1.0f);
     }
     delete pp;
 }
