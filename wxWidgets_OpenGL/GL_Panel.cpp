@@ -91,6 +91,7 @@ void GL_Panel::PromijeniVelicinu(wxSizeEvent& event)
     oglKontekst->PostaviViewport(velicina);
     //upisiUKonzolu(sadrzaj);
     Refresh(false);
+    PosaljiKut();
 }
 
 wxEvtHandler* GL_Panel::DohvatiRukovateljProzora()
