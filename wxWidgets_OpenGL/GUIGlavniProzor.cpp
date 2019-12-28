@@ -72,6 +72,7 @@ GlavniProzor::GlavniProzor( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	brojacKuta = new wxSpinCtrlDouble( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 360, 0, 5 );
 	brojacKuta->SetDigits( 1 );
+	brojacKuta->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_TELETYPE, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
 	brojacKuta->SetForegroundColour( wxColour( 255, 128, 0 ) );
 	brojacKuta->SetBackgroundColour( wxColour( 0, 0, 0 ) );
 

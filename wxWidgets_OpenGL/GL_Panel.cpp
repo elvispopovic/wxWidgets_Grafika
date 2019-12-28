@@ -117,7 +117,7 @@ void GL_Panel::obradiPoruku(wxCommandEvent& event)
     }
     else if(pp->t == PorukaPaneluPodaci::tip::PromijeniKut)
     {
-        kut+=glm::radians(1.0f);
+        kut=glm::radians(pp->kut);
         Animiraj();
     }
     delete pp;

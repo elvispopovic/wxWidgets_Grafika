@@ -3098,7 +3098,7 @@
 
 1576021328 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\svjetlo.h
 
-1577489898 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\guiglavniprozor.h
+1577524654 d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\guiglavniprozor.h
 	<wx/artprov.h>
 	<wx/xrc/xmlres.h>
 	<wx/string.h>
@@ -3119,7 +3119,7 @@
 	<wx/statusbr.h>
 	<wx/frame.h>
 
-1577492224 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_panel.cpp
+1577524244 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\gl_panel.cpp
 	"GL_Panel.h"
 
 1577489898 source:d:\programiranje\wxwidgets_grafika\opengl_kocka_normal_mapa_indeksi\guiglavniprozor.cpp
