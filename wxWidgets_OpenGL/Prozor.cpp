@@ -146,13 +146,20 @@ void Prozor::GumbPokreniZaustavi( wxMouseEvent& event )
 
 void Prozor::PomakKuta( wxSpinDoubleEvent& event )
 {
+    double dohvaceno;
     wxCommandEvent* pomicanje;
     event.Skip(); //omoguæava i ostalima da reagiraju na poruku
     if(panelEvtHandler == nullptr)
         return;
     PorukaPaneluPodaci *pp = new PorukaPaneluPodaci;
+    dohvaceno = brojacKuta->GetValue();
+    if(dohvaceno < 0.0)
+        dohvaceno = 360.0+dohvaceno;
+    else if(dohvaceno>=360.0)
+        dohvaceno -=360.0;
     pp->t=PorukaPaneluPodaci::tip::PromijeniKut;
-    pp->kut=brojacKuta->GetValue();
+    pp->kut=dohvaceno;
+    brojacKuta->SetValue(dohvaceno);
     pomicanje = new wxCommandEvent(EVT_PORUKA_PANELU);
     pomicanje->SetClientData((void *)pp);
     wxQueueEvent(panelEvtHandler,pomicanje);
