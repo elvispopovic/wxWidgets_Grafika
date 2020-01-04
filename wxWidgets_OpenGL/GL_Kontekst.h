@@ -24,6 +24,7 @@ class GL_Kontekst : public wxGLContext
         Kocka *kocka;
         GLuint VertexArrayID[1];
         glm::mat4 View, Projection;
+        Tekstura *tekstura, *normal_mapa, *specular_mapa;
         Svjetlo *glavnoSvjetlo, *dodatnoSvjetlo1, *dodatnoSvjetlo2;
 
         wxGLCanvas* canvas;

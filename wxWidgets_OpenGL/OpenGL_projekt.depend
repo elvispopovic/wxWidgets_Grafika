@@ -3325,7 +3325,7 @@
 1577492139 d:\programiranje\opengl_projekt\gl_panel.h
 	"GL_Kontekst.h"
 
-1578119464 d:\programiranje\opengl_projekt\gl_kontekst.h
+1578157071 d:\programiranje\opengl_projekt\gl_kontekst.h
 	"Shader.h"
 	"Tekstura.h"
 	"Svjetlo.h"
@@ -3371,10 +3371,10 @@
 	"Tekstura.h"
 	"GL_Panel.h"
 
-1578119943 source:d:\programiranje\opengl_projekt\kocka.cpp
+1578157337 source:d:\programiranje\opengl_projekt\kocka.cpp
 	"Kocka.h"
 
-1578119912 d:\programiranje\opengl_projekt\kocka.h
+1578157074 d:\programiranje\opengl_projekt\kocka.h
 	"Shader.h"
 	"Svjetlo.h"
 	"Tekstura.h"

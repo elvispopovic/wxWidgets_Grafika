@@ -6,6 +6,7 @@ GL_Kontekst::GL_Kontekst(wxGLCanvas *canvas) : wxGLContext(canvas, NULL)
     this->canvas = canvas;
     inicijalizirano = false;
     shader = nullptr;
+    tekstura = normal_mapa = specular_mapa = nullptr;
     glavnoSvjetlo=dodatnoSvjetlo1=dodatnoSvjetlo2 = nullptr;
     GL_Panel* panel = dynamic_cast<GL_Panel*>(canvas);
     if(panel)
@@ -18,12 +19,30 @@ GL_Kontekst::~GL_Kontekst()
     delete kocka;
     if(shader != nullptr)
         delete shader;
+    if(tekstura != nullptr)
+    {
+        tekstura->Deaktiviraj();
+        delete tekstura;
+    }
+
+    if(normal_mapa != nullptr)
+    {
+        normal_mapa->Deaktiviraj();
+        delete normal_mapa;
+    }
+
+    if(specular_mapa != nullptr)
+    {
+        specular_mapa->Deaktiviraj();
+        delete specular_mapa;
+    }
     if(glavnoSvjetlo != nullptr)
         delete glavnoSvjetlo;
     if(dodatnoSvjetlo1 != nullptr)
         delete dodatnoSvjetlo1;
     if(dodatnoSvjetlo2 != nullptr)
         delete dodatnoSvjetlo2;
+
 }
 
 /* moze se inicijalizirati tek nakon pokretanja GLEW-a */
@@ -52,13 +71,27 @@ bool GL_Kontekst::Inicijaliziraj()
     if(shader->Kreiraj("ScenaVertex.glsl", "ScenaFragment.glsl")==false)
         return false;
 
+    GLuint program = shader->DohvatiProgram();
+    tekstura = new Tekstura(canvas);
+    tekstura->Kreiraj("tekstrura_kocka.dds");
+    tekstura->PoveziSaLokacijom(program, "difuzni_sampler");
+
+    normal_mapa = new Tekstura(canvas);
+    normal_mapa->Kreiraj("normal_mapa.dds");
+    normal_mapa->PoveziSaLokacijom(program, "normal_sampler");
+
+    specular_mapa = new Tekstura(canvas);
+    specular_mapa->Kreiraj("specular_mapa.dds");
+    specular_mapa->PoveziSaLokacijom(program, "spekularni_sampler");
+
+
     glavnoSvjetlo = new Svjetlo(glm::vec3(4.0,4.0,3.0), 4.0, glm::vec3(1.0,1.0,1.0));
     dodatnoSvjetlo1 = new Svjetlo(glm::vec3(0.0,0.0,3.0), 1.0, glm::vec3(1.0,1.0,0.0));
     dodatnoSvjetlo2 = new Svjetlo(glm::vec3(2.0,0.0,-2.0), 1.0, glm::vec3(0.0,1.0,1.0));
 
-    glavnoSvjetlo->PoveziSaLokacijomSvjetla(shader->DohvatiProgram(),"svjetlo",0);
-    dodatnoSvjetlo1->PoveziSaLokacijomSvjetla(shader->DohvatiProgram(),"svjetlo",1);
-    dodatnoSvjetlo2->PoveziSaLokacijomSvjetla(shader->DohvatiProgram(),"svjetlo",2);
+    glavnoSvjetlo->PoveziSaLokacijomSvjetla(program,"svjetlo",0);
+    dodatnoSvjetlo1->PoveziSaLokacijomSvjetla(program,"svjetlo",1);
+    dodatnoSvjetlo2->PoveziSaLokacijomSvjetla(program,"svjetlo",2);
 
     glGenVertexArrays(1, VertexArrayID);
     kocka->Inicijaliziraj(canvas, VertexArrayID[0], shader);
@@ -95,6 +128,10 @@ void GL_Kontekst::Render(GLfloat kut)
     if(shader == nullptr)
         return;
     shader->KoristiProgram();
+    tekstura->Aktiviraj(0);
+    normal_mapa->Aktiviraj(1);
+    specular_mapa->Aktiviraj(2);
+
     glavnoSvjetlo->Aktiviraj();
     dodatnoSvjetlo1->Aktiviraj();
     dodatnoSvjetlo2->Aktiviraj();

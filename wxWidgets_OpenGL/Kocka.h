@@ -24,7 +24,7 @@ class Kocka
         GLuint MVP_ID, V_ID, M_ID, MV3x3_ID;
         GLuint vertexbuffer, uvbuffer, normbuffer, tangentbuffer, bitangentbuffer, elementbuffer;
 
-        Tekstura *tekstura, *normal_mapa, *specular_mapa;
+
 
         GLfloat *vrhovi, *uvovi, *normale, *tangente, *bitangente;
         unsigned short *indeksi;

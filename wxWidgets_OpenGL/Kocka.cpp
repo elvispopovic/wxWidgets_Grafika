@@ -52,7 +52,7 @@ GLfloat Kocka::uv_podaci[] = {
 
 Kocka::Kocka()
 {
-    tekstura = normal_mapa = specular_mapa = nullptr;
+
     vrhovi = new GLfloat[3*24];
     uvovi = new GLfloat[2*24];
     normale = new GLfloat[3*24];
@@ -68,23 +68,7 @@ Kocka::~Kocka()
     glDeleteBuffers(1, &elementbuffer);
 
 
-    if(tekstura != nullptr)
-    {
-        tekstura->Deaktiviraj();
-        delete tekstura;
-    }
 
-    if(normal_mapa != nullptr)
-    {
-        normal_mapa->Deaktiviraj();
-        delete normal_mapa;
-    }
-
-    if(specular_mapa != nullptr)
-    {
-        specular_mapa->Deaktiviraj();
-        delete specular_mapa;
-    }
     delete[] vrhovi;
     delete[] uvovi;
     delete[] normale;
@@ -103,17 +87,6 @@ bool Kocka::Inicijaliziraj(wxGLCanvas *canvas, GLuint VertexArrayID, Shader* sha
     MV3x3_ID = glGetUniformLocation(program, "MV3x3");
 
     //ucitavanje DDS teksture
-    tekstura = new Tekstura(canvas);
-    tekstura->Kreiraj("tekstrura_kocka.dds");
-    tekstura->PoveziSaLokacijom(program, "difuzni_sampler");
-
-    normal_mapa = new Tekstura(canvas);
-    normal_mapa->Kreiraj("normal_mapa.dds");
-    normal_mapa->PoveziSaLokacijom(program, "normal_sampler");
-
-    specular_mapa = new Tekstura(canvas);
-    specular_mapa->Kreiraj("specular_mapa.dds");
-    specular_mapa->PoveziSaLokacijom(program, "spekularni_sampler");
 
     izracunajVrhove();
     //koordinate
@@ -162,9 +135,6 @@ void Kocka::Render(glm::mat4 View, glm::mat4 Projection, GLfloat kut, glm::vec3 
     glUniformMatrix4fv(V_ID, 1, GL_FALSE, &View[0][0]);
     glUniformMatrix3fv(MV3x3_ID, 1, GL_FALSE, &MV3x3[0][0]);
 
-    tekstura->Aktiviraj(0);
-    normal_mapa->Aktiviraj(1);
-    specular_mapa->Aktiviraj(2);
     glBindVertexArray(VertexArrayID);
 
     glEnableVertexAttribArray(0);
