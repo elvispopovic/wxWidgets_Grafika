@@ -102,6 +102,8 @@
 		<Unit filename="GL_Panel.h" />
 		<Unit filename="GUIGlavniProzor.cpp" />
 		<Unit filename="GUIGlavniProzor.h" />
+		<Unit filename="Kocka.cpp" />
+		<Unit filename="Kocka.h" />
 		<Unit filename="Model.cpp" />
 		<Unit filename="Model.h" />
 		<Unit filename="Prozor.cpp" />

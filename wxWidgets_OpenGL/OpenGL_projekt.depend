@@ -3248,3 +3248,134 @@
 
 1572198102 c:\wxwidgets_3_1_3_mingw\lib\gcc_lib\mswud\wx\setup.h
 
+1577534620 source:d:\programiranje\opengl_projekt\wx_pch.h
+	<wx/wxprec.h>
+	<wx/wx.h>
+	<cstring>
+	<glm/glm.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtx/euler_angles.hpp>
+	<GL/glew.h>
+	<wx/glcanvas.h>
+	<wx/textfile.h>
+	<ctime>
+	<thread>
+	<future>
+	"Strukture.h"
+
+1577491129 d:\programiranje\opengl_projekt\strukture.h
+
+1577404765 source:d:\programiranje\opengl_projekt\aplikacija.cpp
+	"wx_pch.h"
+	"Aplikacija.h"
+	"Prozor.h"
+	"GL_Panel.h"
+
+1577534620 d:\programiranje\opengl_projekt\wx_pch.h
+	<wx/wxprec.h>
+	<wx/wx.h>
+	<cstring>
+	<glm/glm.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtx/euler_angles.hpp>
+	<GL/glew.h>
+	<wx/glcanvas.h>
+	<wx/textfile.h>
+	<ctime>
+	<thread>
+	<future>
+	"Strukture.h"
+
+1577405040 d:\programiranje\opengl_projekt\aplikacija.h
+	<wx/app.h>
+	"Model.h"
+
+1577467363 d:\programiranje\opengl_projekt\model.h
+	"GUIGlavniProzor.h"
+
+1577524654 d:\programiranje\opengl_projekt\guiglavniprozor.h
+	<wx/artprov.h>
+	<wx/xrc/xmlres.h>
+	<wx/string.h>
+	<wx/bitmap.h>
+	<wx/image.h>
+	<wx/icon.h>
+	<wx/menu.h>
+	<wx/gdicmn.h>
+	<wx/font.h>
+	<wx/colour.h>
+	<wx/settings.h>
+	<wx/sizer.h>
+	<wx/panel.h>
+	<wx/button.h>
+	<wx/statline.h>
+	<wx/spinctrl.h>
+	<wx/textctrl.h>
+	<wx/statusbr.h>
+	<wx/frame.h>
+
+1577490433 d:\programiranje\opengl_projekt\prozor.h
+	"Aplikacija.h"
+	"GL_Panel.h"
+	"Model.h"
+	"GUIGlavniProzor.h"
+
+1577492139 d:\programiranje\opengl_projekt\gl_panel.h
+	"GL_Kontekst.h"
+
+1578119464 d:\programiranje\opengl_projekt\gl_kontekst.h
+	"Shader.h"
+	"Tekstura.h"
+	"Svjetlo.h"
+	"Kocka.h"
+
+1576280447 d:\programiranje\opengl_projekt\shader.h
+
+1576336619 d:\programiranje\opengl_projekt\tekstura.h
+
+1577545252 d:\programiranje\opengl_projekt\svjetlo.h
+
+1578119853 source:d:\programiranje\opengl_projekt\gl_kontekst.cpp
+	"GL_Kontekst.h"
+	"GL_Panel.h"
+
+1578095501 source:d:\programiranje\opengl_projekt\gl_panel.cpp
+	"GL_Panel.h"
+
+1577547184 source:d:\programiranje\opengl_projekt\guiglavniprozor.cpp
+	"wx/wxprec.h"
+	<wx/wx.h>
+	"GUIGlavniProzor.h"
+
+1577490986 source:d:\programiranje\opengl_projekt\model.cpp
+	"Model.h"
+	"Prozor.h"
+
+1577547475 source:d:\programiranje\opengl_projekt\prozor.cpp
+	"wx_pch.h"
+	"Prozor.h"
+
+1514140570 source:d:\programiranje\opengl_projekt\resource.rc
+	"wx/msw/wx.rc"
+
+1576838395 source:d:\programiranje\opengl_projekt\shader.cpp
+	"Shader.h"
+	"GL_Panel.h"
+
+1577545256 source:d:\programiranje\opengl_projekt\svjetlo.cpp
+	"Svjetlo.h"
+
+1576336757 source:d:\programiranje\opengl_projekt\tekstura.cpp
+	"Tekstura.h"
+	"GL_Panel.h"
+
+1578119943 source:d:\programiranje\opengl_projekt\kocka.cpp
+	"Kocka.h"
+
+1578119912 d:\programiranje\opengl_projekt\kocka.h
+	"Shader.h"
+	"Svjetlo.h"
+	"Tekstura.h"
+

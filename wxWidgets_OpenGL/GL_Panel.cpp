@@ -25,7 +25,6 @@ bool GL_Panel::Inicijaliziraj()
 {
     static const int attribs[3] = { WX_GL_RGBA, WX_GL_DOUBLEBUFFER, 0};
     wxString sadrzaj;
-    GLenum error;
     if (inicijalizirano == true)
         return true;
     inicijalizirano = false;
@@ -69,7 +68,7 @@ void GL_Panel::Osvjezi(wxPaintEvent& WXUNUSED(event))
     wxSize velicina = GetClientSize();
     oglKontekst->SetCurrent(*this);
     glViewport(0, 0, velicina.x, velicina.y);
-    oglKontekst->Render(velicina, kut);
+    oglKontekst->Render(kut);
     SwapBuffers();
 }
 
