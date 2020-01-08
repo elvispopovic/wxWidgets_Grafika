@@ -104,6 +104,8 @@
 		<Unit filename="GUIGlavniProzor.h" />
 		<Unit filename="Kocka.cpp" />
 		<Unit filename="Kocka.h" />
+		<Unit filename="Kugla.cpp" />
+		<Unit filename="Kugla.h" />
 		<Unit filename="Model.cpp" />
 		<Unit filename="Model.h" />
 		<Unit filename="Prozor.cpp" />

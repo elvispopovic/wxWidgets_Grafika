@@ -23,8 +23,9 @@ wxDECLARE_EVENT(EVT_PORUKA_PROZORU, wxCommandEvent);
 class PorukaPaneluPodaci
 {
     public:
-        enum tip:int{Parametri, Pomicanje, PokreniZaustavi, PromijeniKut, Test};
+        enum tip:int{Parametri, Pomicanje, PokreniZaustavi, PromijeniKut, PromijeniTijelo, Test};
         int t;
+        int i;
         double kut;
         wxString tekst;
         static void UpisiUKonzolu(wxEvtHandler* rukovatelj, wxString sadrzaj)

@@ -23,6 +23,7 @@
 #include <wx/button.h>
 #include <wx/statline.h>
 #include <wx/spinctrl.h>
+#include <wx/radiobox.h>
 #include <wx/textctrl.h>
 #include <wx/statusbr.h>
 #include <wx/frame.h>
@@ -49,6 +50,8 @@ class GlavniProzor : public wxFrame
 		wxButton* gumbPokreni;
 		wxStaticLine* m_staticline1;
 		wxSpinCtrlDouble* brojacKuta;
+		wxStaticLine* m_staticline2;
+		wxRadioBox* m_radioBox1;
 		wxTextCtrl* konzola;
 		wxStatusBar* statusBar;
 
@@ -59,6 +62,7 @@ class GlavniProzor : public wxFrame
 		virtual void GumbPomakni( wxMouseEvent& event ) { event.Skip(); }
 		virtual void GumbPokreniZaustavi( wxMouseEvent& event ) { event.Skip(); }
 		virtual void PomakKuta( wxSpinDoubleEvent& event ) { event.Skip(); }
+		virtual void TijeloPromijenjeno( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:

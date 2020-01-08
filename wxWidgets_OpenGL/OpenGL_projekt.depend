@@ -3264,7 +3264,7 @@
 	<future>
 	"Strukture.h"
 
-1577491129 d:\programiranje\opengl_projekt\strukture.h
+1578445450 d:\programiranje\opengl_projekt\strukture.h
 
 1577404765 source:d:\programiranje\opengl_projekt\aplikacija.cpp
 	"wx_pch.h"
@@ -3295,7 +3295,7 @@
 1577467363 d:\programiranje\opengl_projekt\model.h
 	"GUIGlavniProzor.h"
 
-1577524654 d:\programiranje\opengl_projekt\guiglavniprozor.h
+1578443258 d:\programiranje\opengl_projekt\guiglavniprozor.h
 	<wx/artprov.h>
 	<wx/xrc/xmlres.h>
 	<wx/string.h>
@@ -3312,24 +3312,26 @@
 	<wx/button.h>
 	<wx/statline.h>
 	<wx/spinctrl.h>
+	<wx/radiobox.h>
 	<wx/textctrl.h>
 	<wx/statusbr.h>
 	<wx/frame.h>
 
-1577490433 d:\programiranje\opengl_projekt\prozor.h
+1578443648 d:\programiranje\opengl_projekt\prozor.h
 	"Aplikacija.h"
 	"GL_Panel.h"
 	"Model.h"
 	"GUIGlavniProzor.h"
 
-1577492139 d:\programiranje\opengl_projekt\gl_panel.h
+1578445119 d:\programiranje\opengl_projekt\gl_panel.h
 	"GL_Kontekst.h"
 
-1578157071 d:\programiranje\opengl_projekt\gl_kontekst.h
+1578445022 d:\programiranje\opengl_projekt\gl_kontekst.h
 	"Shader.h"
 	"Tekstura.h"
 	"Svjetlo.h"
 	"Kocka.h"
+	"Kugla.h"
 
 1576280447 d:\programiranje\opengl_projekt\shader.h
 
@@ -3337,23 +3339,23 @@
 
 1577545252 d:\programiranje\opengl_projekt\svjetlo.h
 
-1578119853 source:d:\programiranje\opengl_projekt\gl_kontekst.cpp
+1578445047 source:d:\programiranje\opengl_projekt\gl_kontekst.cpp
 	"GL_Kontekst.h"
 	"GL_Panel.h"
 
-1578095501 source:d:\programiranje\opengl_projekt\gl_panel.cpp
+1578445030 source:d:\programiranje\opengl_projekt\gl_panel.cpp
 	"GL_Panel.h"
 
-1577547184 source:d:\programiranje\opengl_projekt\guiglavniprozor.cpp
+1578443258 source:d:\programiranje\opengl_projekt\guiglavniprozor.cpp
 	"wx/wxprec.h"
 	<wx/wx.h>
 	"GUIGlavniProzor.h"
 
-1577490986 source:d:\programiranje\opengl_projekt\model.cpp
+1578442128 source:d:\programiranje\opengl_projekt\model.cpp
 	"Model.h"
 	"Prozor.h"
 
-1577547475 source:d:\programiranje\opengl_projekt\prozor.cpp
+1578445713 source:d:\programiranje\opengl_projekt\prozor.cpp
 	"wx_pch.h"
 	"Prozor.h"
 
@@ -3364,17 +3366,25 @@
 	"Shader.h"
 	"GL_Panel.h"
 
-1577545256 source:d:\programiranje\opengl_projekt\svjetlo.cpp
+1578352227 source:d:\programiranje\opengl_projekt\svjetlo.cpp
 	"Svjetlo.h"
 
 1576336757 source:d:\programiranje\opengl_projekt\tekstura.cpp
 	"Tekstura.h"
 	"GL_Panel.h"
 
-1578157337 source:d:\programiranje\opengl_projekt\kocka.cpp
+1578413640 source:d:\programiranje\opengl_projekt\kocka.cpp
 	"Kocka.h"
 
-1578157074 d:\programiranje\opengl_projekt\kocka.h
+1578413641 d:\programiranje\opengl_projekt\kocka.h
+	"Shader.h"
+	"Svjetlo.h"
+	"Tekstura.h"
+
+1578441896 source:d:\programiranje\opengl_projekt\kugla.cpp
+	"Kugla.h"
+
+1578441463 d:\programiranje\opengl_projekt\kugla.h
 	"Shader.h"
 	"Svjetlo.h"
 	"Tekstura.h"

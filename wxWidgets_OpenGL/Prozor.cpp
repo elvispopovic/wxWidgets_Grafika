@@ -165,6 +165,22 @@ void Prozor::PomakKuta( wxSpinDoubleEvent& event )
     wxQueueEvent(panelEvtHandler,pomicanje);
 }
 
+void Prozor::TijeloPromijenjeno( wxCommandEvent& event )
+{
+    wxCommandEvent* promjena;
+    event.Skip();
+    if(panelEvtHandler == nullptr)
+        return;
+    PorukaPaneluPodaci *pp = new PorukaPaneluPodaci;
+
+    wxRadioBox *rb = wxDynamicCast(event.GetEventObject(),wxRadioBox);
+    pp->t=PorukaPaneluPodaci::tip::PromijeniTijelo;
+    pp->i=rb->GetSelection();
+    promjena = new wxCommandEvent(EVT_PORUKA_PANELU);
+    promjena->SetClientData((void *)pp);
+    wxQueueEvent(panelEvtHandler,promjena);
+}
+
 void Prozor::obradiPoruku(wxCommandEvent& event)
 {
     PorukaProzoruPodaci* pp;

@@ -50,7 +50,7 @@ GLfloat Kocka::uv_podaci[] = {
    0.75f, 1.0-0.25f
 };
 
-Kocka::Kocka()
+Kocka::Kocka(wxGLCanvas *canvas) : canvas(canvas)
 {
 
     vrhovi = new GLfloat[3*24];
@@ -59,15 +59,17 @@ Kocka::Kocka()
     tangente = new GLfloat[3*24];
     bitangente = new GLfloat[3*24];
     indeksi = new unsigned short[36];
+    kreirajGeometriju();
+    inicijalizirano = false;
 }
 
 Kocka::~Kocka()
 {
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &uvbuffer);
-    glDeleteBuffers(1, &elementbuffer);
+    glDeleteBuffers(1, &indexbuffer);
 
-
+    glDeleteVertexArrays(1, VertexArrayID);
 
     delete[] vrhovi;
     delete[] uvovi;
@@ -77,8 +79,10 @@ Kocka::~Kocka()
     delete[] indeksi;
 }
 
-bool Kocka::Inicijaliziraj(wxGLCanvas *canvas, GLuint VertexArrayID, Shader* shader)
+bool Kocka::Inicijaliziraj(Shader* shader)
 {
+    if(inicijalizirano == true)
+        return true;
     GLuint program = shader->DohvatiProgram();
 
     MVP_ID = glGetUniformLocation(program, "MVP");
@@ -86,9 +90,8 @@ bool Kocka::Inicijaliziraj(wxGLCanvas *canvas, GLuint VertexArrayID, Shader* sha
     M_ID = glGetUniformLocation(program, "M");
     MV3x3_ID = glGetUniformLocation(program, "MV3x3");
 
-    //ucitavanje DDS teksture
+    glGenVertexArrays(1, VertexArrayID);
 
-    izracunajVrhove();
     //koordinate
     glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -112,8 +115,8 @@ bool Kocka::Inicijaliziraj(wxGLCanvas *canvas, GLuint VertexArrayID, Shader* sha
 	glBindBuffer(GL_ARRAY_BUFFER, bitangentbuffer);
 	glBufferData(GL_ARRAY_BUFFER, 3*36*sizeof(GLfloat), bitangente, GL_STATIC_DRAW);
 
-	glGenBuffers(1, &elementbuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
+	glGenBuffers(1, &indexbuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexbuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned short), indeksi , GL_STATIC_DRAW);
 
     return true;
@@ -135,7 +138,7 @@ void Kocka::Render(glm::mat4 View, glm::mat4 Projection, GLfloat kut, glm::vec3 
     glUniformMatrix4fv(V_ID, 1, GL_FALSE, &View[0][0]);
     glUniformMatrix3fv(MV3x3_ID, 1, GL_FALSE, &MV3x3[0][0]);
 
-    glBindVertexArray(VertexArrayID);
+    glBindVertexArray(VertexArrayID[0]);
 
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -191,7 +194,7 @@ void Kocka::Render(glm::mat4 View, glm::mat4 Projection, GLfloat kut, glm::vec3 
         (void*)0
     );
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer); //aktiviramo buffer indeksa
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexbuffer); //aktiviramo buffer indeksa
 	//crtamo gornju i donju stranicu
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, (void*)0);
 
@@ -202,7 +205,7 @@ void Kocka::Render(glm::mat4 View, glm::mat4 Projection, GLfloat kut, glm::vec3 
     glDisableVertexAttribArray(4);
 }
 
-void Kocka::izracunajVrhove()
+void Kocka::kreirajGeometriju()
 {
 
     static const unsigned short trokuti[6] = {0,1,2,0,2,3};
@@ -240,14 +243,18 @@ void Kocka::izracunajVrhove()
         off2 = k*12; //4*3
         glm::vec3 v1 = glm::vec3(vrhovi[off2+3], vrhovi[off2+4], vrhovi[off2+5])-glm::vec3(vrhovi[off2], vrhovi[off2+1], vrhovi[off2+2]);
         glm::vec3 v2 = glm::vec3(vrhovi[off2+9], vrhovi[off2+10], vrhovi[off2+11])-glm::vec3(vrhovi[off2], vrhovi[off2+1], vrhovi[off2+2]);
-        glm::vec3 normala = glm::normalize(glm::cross(v1,v2));
+
+        glm::vec3 normala=glm::normalize(glm::cross(v1,v2));
 
         off2 = k*8; //4*2
         glm::vec2 uv1 = glm::vec2(uvovi[off2+2], uvovi[off2+3])-glm::vec2(uvovi[off2], uvovi[off2+1]);
         glm::vec2 uv2 = glm::vec2(uvovi[off2+6], uvovi[off2+7])-glm::vec2(uvovi[off2], uvovi[off2+1]);
-        float r=1.0f/(uv1.x*uv2.y-uv1.y*uv2.x); //nazivnik
-		glm::vec3 tangenta = glm::normalize((v1*uv2.y - v2*uv1.y)*r);
-		glm::vec3 bitangenta = glm::normalize((v2*uv1.x - v1*uv2.x)*r);
+		glm::vec3 tangenta = glm::normalize(v1*uv2.y - v2*uv1.y);
+		glm::vec3 bitangenta = glm::normalize(v2*uv1.x - v1*uv2.x);
+
+		//Gramm-Schmidt ortogonalizacija (ako tangenta, bitangenta i normala nisu meðusobno okomite)
+		tangenta = glm::normalize(tangenta - normala * glm::dot(normala, tangenta));
+		if (glm::dot(glm::cross(normala, tangenta), bitangenta) < 0.0f) tangenta = tangenta * -1.0f;
 
 		for(j=0; j<4; j++)
         {

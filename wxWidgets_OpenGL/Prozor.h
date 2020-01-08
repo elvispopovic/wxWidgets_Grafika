@@ -33,6 +33,7 @@ class Prozor: public GlavniProzor
         void GumbPomakni( wxMouseEvent& event);
         void GumbPokreniZaustavi( wxMouseEvent& event );
         void PomakKuta( wxSpinDoubleEvent& event );
+        void TijeloPromijenjeno( wxCommandEvent& event );
         void obradiPoruku(wxCommandEvent& event);
     private:
         GL_Panel* glPanel;

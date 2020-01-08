@@ -78,6 +78,15 @@ GlavniProzor::GlavniProzor( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	bSizerKontrole->Add( brojacKuta, 0, wxALL, 5 );
 
+	m_staticline2 = new wxStaticLine( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
+	bSizerKontrole->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
+
+	wxString m_radioBox1Choices[] = { wxT("Kocka"), wxT("Lopta") };
+	int m_radioBox1NChoices = sizeof( m_radioBox1Choices ) / sizeof( wxString );
+	m_radioBox1 = new wxRadioBox( this, wxID_ANY, wxT("Izbor tijela"), wxDefaultPosition, wxDefaultSize, m_radioBox1NChoices, m_radioBox1Choices, 1, wxRA_SPECIFY_ROWS );
+	m_radioBox1->SetSelection( 0 );
+	bSizerKontrole->Add( m_radioBox1, 0, wxALL|wxEXPAND, 5 );
+
 
 	bSizerGrafika_Kontrole->Add( bSizerKontrole, 0, 0, 5 );
 
@@ -107,6 +116,7 @@ GlavniProzor::GlavniProzor( wxWindow* parent, wxWindowID id, const wxString& tit
 	gumbPomakni->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( GlavniProzor::GumbPomakni ), NULL, this );
 	gumbPokreni->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( GlavniProzor::GumbPokreniZaustavi ), NULL, this );
 	brojacKuta->Connect( wxEVT_COMMAND_SPINCTRLDOUBLE_UPDATED, wxSpinDoubleEventHandler( GlavniProzor::PomakKuta ), NULL, this );
+	m_radioBox1->Connect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( GlavniProzor::TijeloPromijenjeno ), NULL, this );
 }
 
 GlavniProzor::~GlavniProzor()
@@ -116,5 +126,6 @@ GlavniProzor::~GlavniProzor()
 	gumbPomakni->Disconnect( wxEVT_LEFT_UP, wxMouseEventHandler( GlavniProzor::GumbPomakni ), NULL, this );
 	gumbPokreni->Disconnect( wxEVT_LEFT_UP, wxMouseEventHandler( GlavniProzor::GumbPokreniZaustavi ), NULL, this );
 	brojacKuta->Disconnect( wxEVT_COMMAND_SPINCTRLDOUBLE_UPDATED, wxSpinDoubleEventHandler( GlavniProzor::PomakKuta ), NULL, this );
+	m_radioBox1->Disconnect( wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler( GlavniProzor::TijeloPromijenjeno ), NULL, this );
 
 }

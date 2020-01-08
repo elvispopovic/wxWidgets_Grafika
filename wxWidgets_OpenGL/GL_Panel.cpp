@@ -11,6 +11,7 @@ GL_Panel::GL_Panel(wxWindow *parent, const wxGLAttributes& atributi) : wxGLCanva
     Bind(wxEVT_SIZE, wxSizeEventHandler(GL_Panel::PromijeniVelicinu),this);
     Bind(EVT_PORUKA_PANELU, &GL_Panel::obradiPoruku, this);
     kut = glm::radians(45.0f);
+    tijelo = 0;
 }
 
 GL_Panel::~GL_Panel()
@@ -68,7 +69,7 @@ void GL_Panel::Osvjezi(wxPaintEvent& WXUNUSED(event))
     wxSize velicina = GetClientSize();
     oglKontekst->SetCurrent(*this);
     glViewport(0, 0, velicina.x, velicina.y);
-    oglKontekst->Render(kut);
+    oglKontekst->Render(kut,tijelo);
     SwapBuffers();
 }
 
@@ -100,6 +101,7 @@ wxEvtHandler* GL_Panel::DohvatiRukovateljProzora()
 
 void GL_Panel::obradiPoruku(wxCommandEvent& event)
 {
+    wxString sadrzaj;
     PorukaPaneluPodaci* pp;
     if((pp = (PorukaPaneluPodaci *)(event.GetClientData()))==nullptr)
         return;
@@ -117,6 +119,16 @@ void GL_Panel::obradiPoruku(wxCommandEvent& event)
     else if(pp->t == PorukaPaneluPodaci::tip::PromijeniKut)
     {
         kut=glm::radians(pp->kut);
+        Animiraj();
+    }
+    else if(pp->t == PorukaPaneluPodaci::tip::PromijeniTijelo)
+    {
+        sadrzaj << "Promijenjeno je tijelo " << (pp->i == 0?"- lopta->kocka":"- kocka->lopta") << ".\n";
+        PorukaPaneluPodaci::UpisiUKonzolu(prozorEvtHandler,sadrzaj);
+        if(pp->i == 0)
+            tijelo = 0;
+        else
+            tijelo = 1;
         Animiraj();
     }
     delete pp;

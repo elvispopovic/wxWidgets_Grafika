@@ -24,6 +24,7 @@ class GL_Panel : public wxGLCanvas
         GL_Kontekst*  oglKontekst;
         bool inicijalizirano;
         GLfloat kut;
+        int tijelo;
         void PosaljiKut();
 
 };

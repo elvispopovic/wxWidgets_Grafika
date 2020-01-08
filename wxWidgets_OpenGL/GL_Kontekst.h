@@ -5,6 +5,7 @@
 #include "Tekstura.h"
 #include "Svjetlo.h"
 #include "Kocka.h"
+#include "Kugla.h"
 
 
 class GL_Kontekst : public wxGLContext
@@ -14,7 +15,7 @@ class GL_Kontekst : public wxGLContext
         virtual ~GL_Kontekst();
         bool Inicijaliziraj();
         virtual void PostaviViewport(wxSize velicina);
-        virtual void Render(GLfloat kut);
+        virtual void Render(GLfloat kut, int tip);
 
     protected:
 
@@ -22,9 +23,11 @@ class GL_Kontekst : public wxGLContext
         bool inicijalizirano;
         Shader* shader;
         Kocka *kocka;
-        GLuint VertexArrayID[1];
+        Kugla *lopta;
+
         glm::mat4 View, Projection;
-        Tekstura *tekstura, *normal_mapa, *specular_mapa;
+        Tekstura *kocka_tekstura, *kocka_normal_mapa, *kocka_specular_mapa;
+        Tekstura *lopta_tekstura, *lopta_normal_mapa, *lopta_specular_mapa;
         Svjetlo *glavnoSvjetlo, *dodatnoSvjetlo1, *dodatnoSvjetlo2;
 
         wxGLCanvas* canvas;
