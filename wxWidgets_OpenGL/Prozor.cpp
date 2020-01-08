@@ -57,6 +57,7 @@ Prozor::Prozor(wxFrame *prozor, Model* model)
     panelEvtHandler = nullptr;
     modelEvtHandler = (wxEvtHandler*) model;
     Bind(EVT_PORUKA_PROZORU, &Prozor::obradiPoruku, this);
+    Bind(wxEVT_CHAR_HOOK, &Prozor::OnKeyDown, this);
     SetMinSize(wxSize(480, 480));
 
     wxGLAttributes atributi;
@@ -89,11 +90,39 @@ Prozor::Prozor(wxFrame *prozor, Model* model)
 Prozor::~Prozor()
 {
     Unbind(EVT_PORUKA_PROZORU, &Prozor::obradiPoruku, this);
+    Unbind(wxEVT_CHAR_HOOK, &Prozor::OnKeyDown, this);
 }
 
 GL_Panel* Prozor::DohvatiGLPanel()
 {
     return this->glPanel;
+}
+
+void Prozor::OnKeyDown(wxKeyEvent& event)
+{
+    int tipka;
+    wxString sadrzaj;
+    event.Skip();
+    wxCommandEvent* obradaTipki;
+    PorukaPaneluPodaci* pp;
+
+    tipka = toupper(event.GetKeyCode());
+    switch(tipka)
+    {
+    case 'W':
+    case 'A':
+    case 'D':
+    case 'S':   pp = new PorukaPaneluPodaci;
+                pp->t=PorukaPaneluPodaci::tip::PomakniKameru;
+                pp->i=tipka;
+                obradaTipki = new wxCommandEvent(EVT_PORUKA_PANELU);
+                obradaTipki->SetClientData((void *)pp);
+                wxQueueEvent(panelEvtHandler,obradaTipki);
+                break;
+    default: sadrzaj << "Pritisnuta je tipka broj " << tipka << ".\n";
+    }
+
+    konzola->AppendText(sadrzaj);
 }
 
 void Prozor::OnClose(wxCloseEvent &event)

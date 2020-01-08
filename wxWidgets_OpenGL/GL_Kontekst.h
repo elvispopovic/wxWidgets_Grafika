@@ -14,7 +14,7 @@ class GL_Kontekst : public wxGLContext
         GL_Kontekst(wxGLCanvas *canvas);
         virtual ~GL_Kontekst();
         bool Inicijaliziraj();
-        virtual void PostaviViewport(wxSize velicina);
+        virtual void PostaviViewport(wxSize velicina, GLfloat azimutKamere, GLfloat nagibKamere);
         virtual void Render(GLfloat kut, int tip);
 
     protected:
@@ -28,7 +28,7 @@ class GL_Kontekst : public wxGLContext
         glm::mat4 View, Projection;
         Tekstura *kocka_tekstura, *kocka_normal_mapa, *kocka_specular_mapa;
         Tekstura *lopta_tekstura, *lopta_normal_mapa, *lopta_specular_mapa;
-        Svjetlo *glavnoSvjetlo, *dodatnoSvjetlo1, *dodatnoSvjetlo2;
+        Svjetlo *glavnoSvjetlo, *dodatnoSvjetlo1, *dodatnoSvjetlo2, *donjeSvjetlo;
 
         wxGLCanvas* canvas;
         wxEvtHandler* prozorEvtHandler;

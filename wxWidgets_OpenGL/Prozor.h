@@ -39,6 +39,7 @@ class Prozor: public GlavniProzor
         GL_Panel* glPanel;
         wxEvtHandler *panelEvtHandler;
         wxEvtHandler *modelEvtHandler;
+        virtual void OnKeyDown(wxKeyEvent& event);
         virtual void OnClose(wxCloseEvent& event);
         virtual void OnQuit(wxCommandEvent& event);
         virtual void OnAbout(wxCommandEvent& event);

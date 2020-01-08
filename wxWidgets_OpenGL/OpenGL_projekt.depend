@@ -3264,7 +3264,7 @@
 	<future>
 	"Strukture.h"
 
-1578445450 d:\programiranje\opengl_projekt\strukture.h
+1578500978 d:\programiranje\opengl_projekt\strukture.h
 
 1577404765 source:d:\programiranje\opengl_projekt\aplikacija.cpp
 	"wx_pch.h"
@@ -3317,16 +3317,16 @@
 	<wx/statusbr.h>
 	<wx/frame.h>
 
-1578443648 d:\programiranje\opengl_projekt\prozor.h
+1578498102 d:\programiranje\opengl_projekt\prozor.h
 	"Aplikacija.h"
 	"GL_Panel.h"
 	"Model.h"
 	"GUIGlavniProzor.h"
 
-1578445119 d:\programiranje\opengl_projekt\gl_panel.h
+1578504376 d:\programiranje\opengl_projekt\gl_panel.h
 	"GL_Kontekst.h"
 
-1578445022 d:\programiranje\opengl_projekt\gl_kontekst.h
+1578511503 d:\programiranje\opengl_projekt\gl_kontekst.h
 	"Shader.h"
 	"Tekstura.h"
 	"Svjetlo.h"
@@ -3339,11 +3339,11 @@
 
 1577545252 d:\programiranje\opengl_projekt\svjetlo.h
 
-1578445047 source:d:\programiranje\opengl_projekt\gl_kontekst.cpp
+1578504944 source:d:\programiranje\opengl_projekt\gl_kontekst.cpp
 	"GL_Kontekst.h"
 	"GL_Panel.h"
 
-1578445030 source:d:\programiranje\opengl_projekt\gl_panel.cpp
+1578505073 source:d:\programiranje\opengl_projekt\gl_panel.cpp
 	"GL_Panel.h"
 
 1578443258 source:d:\programiranje\opengl_projekt\guiglavniprozor.cpp
@@ -3355,7 +3355,7 @@
 	"Model.h"
 	"Prozor.h"
 
-1578445713 source:d:\programiranje\opengl_projekt\prozor.cpp
+1578501541 source:d:\programiranje\opengl_projekt\prozor.cpp
 	"wx_pch.h"
 	"Prozor.h"
 

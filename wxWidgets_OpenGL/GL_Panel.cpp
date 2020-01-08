@@ -11,6 +11,8 @@ GL_Panel::GL_Panel(wxWindow *parent, const wxGLAttributes& atributi) : wxGLCanva
     Bind(wxEVT_SIZE, wxSizeEventHandler(GL_Panel::PromijeniVelicinu),this);
     Bind(EVT_PORUKA_PANELU, &GL_Panel::obradiPoruku, this);
     kut = glm::radians(45.0f);
+    nagibKamere = 30.0f;
+    azimutKamere = 0.0f;
     tijelo = 0;
 }
 
@@ -87,7 +89,7 @@ void GL_Panel::PromijeniVelicinu(wxSizeEvent& event)
     wxSize velicina = GetClientSize();
     //sadrzaj << "Promijenjena velicina, x: " << velicina.x << ", y: " << velicina.y << "\n";
     oglKontekst->SetCurrent(*this);
-    oglKontekst->PostaviViewport(velicina);
+    oglKontekst->PostaviViewport(velicina, azimutKamere, nagibKamere);
     //upisiUKonzolu(sadrzaj);
     Refresh(false);
     PosaljiKut();
@@ -115,6 +117,27 @@ void GL_Panel::obradiPoruku(wxCommandEvent& event)
     {
         kut+=glm::radians(1.0f);
         Animiraj();
+    }
+    else if(pp->t == PorukaPaneluPodaci::tip::PomakniKameru)
+    {
+        switch(pp->i)
+        {
+            case 'W': nagibKamere+=1.0; break;
+            case 'S': nagibKamere-=1.0; break;
+            case 'A': azimutKamere-=1.0; break;
+            case 'D': azimutKamere+=1.0; break;
+        }
+        if(nagibKamere>89.0)
+            nagibKamere = 89.0;
+        else if(nagibKamere<-89.0)
+            nagibKamere = -89.0;
+        if(azimutKamere<0.0)
+            azimutKamere+=360.0;
+        else if(azimutKamere>=360.0)
+            azimutKamere-=360.0;
+        wxSize velicina = GetClientSize();
+        oglKontekst->PostaviViewport(velicina, azimutKamere, nagibKamere);
+        Refresh(false);
     }
     else if(pp->t == PorukaPaneluPodaci::tip::PromijeniKut)
     {

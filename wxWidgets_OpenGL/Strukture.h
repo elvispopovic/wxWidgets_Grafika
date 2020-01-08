@@ -23,7 +23,7 @@ wxDECLARE_EVENT(EVT_PORUKA_PROZORU, wxCommandEvent);
 class PorukaPaneluPodaci
 {
     public:
-        enum tip:int{Parametri, Pomicanje, PokreniZaustavi, PromijeniKut, PromijeniTijelo, Test};
+        enum tip:int{Parametri, Pomicanje, PomakniKameru, PokreniZaustavi, PromijeniKut, PromijeniTijelo, Test};
         int t;
         int i;
         double kut;

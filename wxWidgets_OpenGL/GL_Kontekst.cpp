@@ -8,7 +8,7 @@ GL_Kontekst::GL_Kontekst(wxGLCanvas *canvas) : wxGLContext(canvas, NULL)
     shader = nullptr;
     kocka_tekstura = kocka_normal_mapa = kocka_specular_mapa = nullptr;
     lopta_tekstura = lopta_normal_mapa = lopta_specular_mapa = nullptr;
-    glavnoSvjetlo=dodatnoSvjetlo1=dodatnoSvjetlo2 = nullptr;
+    glavnoSvjetlo=dodatnoSvjetlo1=dodatnoSvjetlo2 = donjeSvjetlo = nullptr;
     GL_Panel* panel = dynamic_cast<GL_Panel*>(canvas);
     if(panel)
         prozorEvtHandler = panel->DohvatiRukovateljProzora();
@@ -64,6 +64,8 @@ GL_Kontekst::~GL_Kontekst()
         delete dodatnoSvjetlo1;
     if(dodatnoSvjetlo2 != nullptr)
         delete dodatnoSvjetlo2;
+    if(donjeSvjetlo != nullptr)
+        delete donjeSvjetlo;
 
 }
 
@@ -119,19 +121,21 @@ bool GL_Kontekst::Inicijaliziraj()
     lopta_specular_mapa->PoveziSaLokacijom(program, "spekularni_sampler");
 
     glavnoSvjetlo = new Svjetlo(glm::vec3(0.0,6.0,3.0), 4.0, glm::vec3(1.0,1.0,1.0));
-    dodatnoSvjetlo1 = new Svjetlo(glm::vec3(-3.0,0.0,2.0), 2.0, glm::vec3(1.0,1.0,0.5));
-    dodatnoSvjetlo2 = new Svjetlo(glm::vec3(3.0,0.0,2.0), 2.0, glm::vec3(0.5,1.0,1.0));
+    dodatnoSvjetlo1 = new Svjetlo(glm::vec3(-3.0,0.0,2.0), 2.0, glm::vec3(1.0,0.8,0.3));
+    dodatnoSvjetlo2 = new Svjetlo(glm::vec3(3.0,0.0,2.0), 2.0, glm::vec3(0.8,0.2,1.0));
+    donjeSvjetlo = new Svjetlo(glm::vec3(0.0,-6.0,0.0), 3.0, glm::vec3(0.2,0.5,1.0));
 
     glavnoSvjetlo->PoveziSaLokacijomSvjetla(program,"svjetlo",0);
     dodatnoSvjetlo1->PoveziSaLokacijomSvjetla(program,"svjetlo",1);
     dodatnoSvjetlo2->PoveziSaLokacijomSvjetla(program,"svjetlo",2);
+    donjeSvjetlo->PoveziSaLokacijomSvjetla(program,"svjetlo",3);
 
     kocka->Inicijaliziraj(shader);
     lopta->Inicijaliziraj(shader);
     return true;
 }
 
-void GL_Kontekst::PostaviViewport(wxSize velicina)
+void GL_Kontekst::PostaviViewport(wxSize velicina, GLfloat azimutKamere, GLfloat nagibKamere)
 {
     wxString sadrzaj;
     GLfloat omjer;
@@ -144,13 +148,18 @@ void GL_Kontekst::PostaviViewport(wxSize velicina)
         omjer=GLfloat(velicina.x)/GLfloat(velicina.y);
 
     Projection = glm::perspective(glm::radians(45.0f), omjer, 0.1f, 100.0f);
+
+    glm::vec2 e = glm::vec2(5.0,5.0)*glm::vec2(sin(glm::radians(nagibKamere)), cos(glm::radians(nagibKamere)));
+    glm::vec3 polozajKamere  = glm::vec3(e.y*glm::sin(glm::radians(azimutKamere)),e.x,e.y*glm::cos(glm::radians(azimutKamere)));
+    //glm::vec3 polozajKamere = glm::vec3(0.0,5.0f*glm::sin(glm::radians(nagibKamere)),r);
+
     View       = glm::lookAt(
-                        glm::vec3(0,3,4), // Pozicija kamere u svjetskom sustavu
+                        polozajKamere, // Pozicija kamere u svjetskom sustavu
                         glm::vec3(0,0,0), // tocka prema kuda kamera gleda
                         glm::vec3(0,1,0)  // vektor smjera gore kamere
                         );
 
-    sadrzaj << wxT("Viewport: ") << velicina.x << " x " << velicina.y << "\n";
+    sadrzaj << wxT("Viewport: ") << velicina.x << " x " << velicina.y << ", azimut kamere: " << azimutKamere << ", nagib kamere: " << nagibKamere << ".\n";
     PorukaPaneluPodaci::UpisiUKonzolu(prozorEvtHandler, sadrzaj);
 }
 
@@ -165,6 +174,7 @@ void GL_Kontekst::Render(GLfloat kut, int tip)
     glavnoSvjetlo->Aktiviraj();
     dodatnoSvjetlo1->Aktiviraj();
     dodatnoSvjetlo2->Aktiviraj();
+    donjeSvjetlo->Aktiviraj();
 
     if(tip == 0 && kocka != nullptr)
     {
